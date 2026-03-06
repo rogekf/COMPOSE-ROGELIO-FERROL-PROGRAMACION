@@ -194,7 +194,7 @@ fun Ejercicio5() {
 @Composable
 fun Ejercicio6() {
     // Estado del tablero: una lista de 9 booleanos
-    val celdas = remember { mutableStateListOf(*Array(9) { false }) }
+    val celdas = remember { List(3){ MutableList(3){ mutableStateOf(' ') } } }
 
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Dibujamos un tablero de 3x3. Cada elemento del tablero es un box y es clickeable. Al hacer clic en cada celda colocamos una marca '\\\\u2714'")
@@ -210,11 +210,13 @@ fun Ejercicio6() {
                             modifier = Modifier
                                 .size(60.dp)
                                 .border(0.5.dp, Color.Black)
-                                .background(if (celdas[index]) Color(0xFFE0E0E0) else Color.White)
-                                .clickable { celdas[index] = !celdas[index] },
+                                //.background(if (celdas[fila][col]) Color(0xFFE0E0E0) else Color.White)
+                                .clickable { celdas[fila][col].value = '✔' },
+
                             contentAlignment = Alignment.Center
+
                         ) {
-                            if (celdas[index]) Text("\u2714", color = Color(0xFFE0E0E0), style = MaterialTheme.typography.h5)
+                            Text("${celdas[fila][col].value}")
                         }
                     }
                 }
